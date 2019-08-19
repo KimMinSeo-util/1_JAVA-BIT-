@@ -5,13 +5,26 @@
 ---
 -- SQLPlus 실행방법
 -- SQL>@demo.sql
-(UTF-8로 돼있어서 한글 깨지면 다른이름으로 저장하기 해서 안씨로 저장하면 된다)
 
-madang/madang 계정 생성후 실행합니다.
-TABLESPACE는 bit 로 지덩합니다.
-권한은 connect,resource 권한을 부여합니다.
+
+--madang/madang 계정 생성후 실행합니다.
+--TABLESPACE는 bit 로 지덩합니다.
+--권한은 connect,resource 권한을 부여합니다.
+--(UTF-8=> 한글 깨지면 다른이름으로 저장하기 해서 안씨로 저장하면 된다)
+
+conn system/1234
+create user madang identified by madang
+default tablespace bit;
+
+grant connect,resource to madang;
+
 
 conn madang/madang;
+
+drop table Orders;
+drop table Customer;
+drop table book;
+drop table Imported_Book;
 
 CREATE TABLE Book (
   bookid      NUMBER(2) PRIMARY KEY,
