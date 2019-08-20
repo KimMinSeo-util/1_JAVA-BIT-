@@ -65,8 +65,7 @@ order by to_char(hire_date,'MM');
 select e.first_name, e.hire_date, m.employee_id, m.first_name
 from employees e left outer join employees m
 on e.manager_id = m.employee_id
-where to_char(e.hire_date,'yy') = '08'
-or e.manager_id is null;
+where to_char(e.hire_date,'yy') = '08';
 
 8. ‘Sales’부서에 속한 직원의 이름(first_name), 
 급여(salary), 부서이름(department_name)을 조회하시오. 
@@ -84,8 +83,7 @@ where lower(d.department_name) = lower('Sales');
 select e.employee_id, e.first_name, e.last_name, nvl2(e.manager_id,d.department_name,'<NOT-ASSIGNED>')
 from employees e left outer join departments d
 on e.department_id = d.department_id
-where to_char(e.hire_date,'yyyy') = '2004'
-or e.manager_id is null;
+where to_char(e.hire_date,'yyyy') = '2004';
 
 10. 2005년에 입사한 직원의 이름(first_name), 
 입사일(hire_date), 관리자사번(employee_id), 
@@ -95,5 +93,4 @@ or e.manager_id is null;
 select e.first_name, e.hire_date, m.employee_id, m.first_name
 from employees e left outer join employees m
 on e.manager_id = m.employee_id
-where to_char(e.hire_date,'yyyy') = '2005'
-or e.manager_id is null;
+where to_char(e.hire_date,'yyyy') = '2005';
