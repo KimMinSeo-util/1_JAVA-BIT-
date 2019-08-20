@@ -133,6 +133,126 @@ commit;
 insert into dept values(10,'EDU','SEOUL');
 insert into dept2 values(10,'EDU','SEOUL');
 
+insert into emp (empno,ename,hiredate,sal,deptno) 
+             values(9999,'홍길동',sysdate,0,40);
 
+insert into emp2 (empno,ename,hiredate,sal,deptno) 
+             values(9999,'홍길동',sysdate,0,90);
+
+insert into emp (empno,ename,hiredate,sal,deptno) 
+             values(9999,'홍길동',sysdate,0,40);
+
+
+
+             
+drop table book;	
+create table book( 
+   bookno   number(5)  constraint scott_book_pk primary key  ,
+   title    varchar2(30) constraint scott_book_title_unique unique,
+   author   varchar2(30),
+   price    number(7,2) constraint book_price_check check(price>0),
+   pubdate  date default sysdate
+);     
+
+insert into book (bookno,title,author,price,pubdate) 
+              values(1,'....','홍길동',900,sysdate);
+
+insert into book (bookno,title,author,price,pubdate) 
+              values(2,'jsp','홍길동',22000,sysdate);
+             
+insert into book (bookno,title,author,price,pubdate) 
+              values(1,'java','김길동',32000,default);
+              
+commit;             
+             
+select CONSTRAINT_name 
+from user_cons_columns
+where table_name='BOOK';             
+             
+             
+drop table book;	
+create table book( 
+   bookno   number(5) primary key ,
+   title    varchar2(30)  unique,
+   author   varchar2(30),
+   price    number(7,2) check(price>0),
+   pubdate  date default sysdate
+);   
+
+drop table book;	
+create table book( 
+   bookno   number(5) ,
+   title    varchar2(30)  unique,
+   author   varchar2(30),
+   price    number(7,2) check(price>0),
+   pubdate  date default sysdate
+);   
+
+alter table book add CONSTRAINT book_bookno_pk primary key(bookno);
+alter table book drop CONSTRAINT book_bookno_pk;
+
+insert into book (bookno,title,author,price,pubdate) 
+              values(1,null,'김길동',32000,default);
+
+insert into book (bookno,title,author,price) 
+              values(5,null,'최길동',32000);
+ 
+              
+select * from book;
+commit;
+
+select CONSTRAINT_name 
+from user_cons_columns
+where table_name='BOOK';             
+ 
+#################################################
+emp   dept
+#################################################
+delete from dept where deptno=50;
+commit;
+
+drop table dept2;
+create table dept2 as select * from dept;
+alter table dept2 add CONSTRAINT dept2_pk primary key(deptno);
+
+
+drop table emp2;
+create table emp2 as select * from emp;
+alter table emp2 add CONSTRAINT emp2_pk primary key(empno);
+alter table emp2 add foreign key(deptno) references dept2;
+alter table emp2 add foreign key(mgr) references emp2;
+
+select * from dept2;
+insert into dept2 values(50,'EDU','SEOUL');
+
+select * from emp2;
+insert into emp2 (empno,ename,hiredate,sal,deptno) 
+             values(9999,'홍길동',sysdate,0,50);
+
+insert into emp2 (empno,ename,hiredate,sal,deptno) 
+             values(7777,'고길동',sysdate,0,null);
+             
+insert into emp2 (empno,ename,hiredate,sal,deptno,mgr) 
+             values(8888,'이길동',sysdate,0,null,10);
+ 
+             
+drop table emp2 cascade CONSTRAINT;
+drop table dept2 cascade CONSTRAINT;
+             
+
+             
+###############################################
+트랜잭션
+###############################################
+create table emp2 as select * from emp;
+select * from emp2;
+
+sqlplus 창1
+delete from emp2 where deptno=10;
+
+
+sqlplus 창2
+update emp2 set comm=0 where deptno=10;
+block 되는 거 확인  => 창1에서 commit or rollback 명령 수행하면 lock 풀림 
 
 
