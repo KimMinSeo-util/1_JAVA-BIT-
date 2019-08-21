@@ -240,6 +240,10 @@ drop table emp2 cascade CONSTRAINT;
 drop table dept2 cascade CONSTRAINT;
              
 
+
+
+
+
              
 ###############################################
 트랜잭션

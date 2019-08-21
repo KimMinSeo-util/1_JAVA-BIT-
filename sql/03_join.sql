@@ -288,6 +288,17 @@ select deptno,ename,sal
 from emp
 where sal in (select min(sal) from emp group by deptno);
 
+## 각각의 부서에서 급여가 가장 많은 사원 리스트
+select deptno,ename,sal
+from emp
+where sal in (select max(sal) from emp group by deptno);
+
+select deptno,ename,sal
+from emp
+where (deptno,sal) 
+in (select deptno,max(sal) from emp group by deptno);
+
+
 
 #################################################################
 상관관계 서브쿼리  : outer 쿼리의 컬럼중 하나가 inner 쿼리문에서 사용되는 쿼리문 
@@ -332,16 +343,26 @@ select rownum,ename,sal,hiredate
 from (select * from emp order by sal desc)
 where rownum between 4 and 7;    //   X
 
+ 
+select rownum,ename,sal,hiredate
+from (select * from emp order by sal desc)
+where rownum between 1 and 4; 
+
+##################################
+page 처리
+##################################
+
+select * from (
+select rownum row#,ename,sal,hiredate
+from (select * from emp order by sal desc)
+)
+where row# between 11 and 15; 
 
 
-
-
-
-
-
-
-
-
+                start       end
+1page  1~5      5*0+1       +4
+2page  6~10     5*1+1       +4
+3page  11~15    5*2+1       +4
 
 
 

@@ -13,6 +13,8 @@
 --(UTF-8=> 한글 깨지면 다른이름으로 저장하기 해서 안씨로 저장하면 된다)
 
 conn system/1234
+
+drop user madang;
 create user madang identified by madang
 default tablespace bit;
 
