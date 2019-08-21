@@ -77,7 +77,34 @@ select * from dept2;
 delete from dept2;
 commit;
 
-insert into dept2 (deptno,dname,loc) values(??????,'인사부','비트');
+select nvl(max(deptno),0)+10 from dept2;
+
+
+insert into dept2 (deptno,dname,loc) 
+values((select nvl(max(deptno),0)+10 from dept2),'인사부','비트');
+
+
+#########################################
+index
+#########################################
+select * from dept;
+select * from emp;
+
+set autotrace on;
+
+select * from emp where empno=7698;      //index 기반 
+select * from emp where ename='FORD';    //full scan  
+
+create index emp_ename_idx on emp(ename);
+
+drop index emp_ename_idx;
+
+set autotrace off;
+
+select index_name,table_name from user_indexes;
+
+
+
 
 
 
