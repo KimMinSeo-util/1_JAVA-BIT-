@@ -15,10 +15,6 @@ begin
 end;
 /
 
-execute update_sal(7369);
-commit;
-
-drop procedure update_sal;
 
 
 *******************
@@ -32,7 +28,6 @@ CREATE TABLE Book (
   price       NUMBER(8) 
 );
 
-Drop PROCEDURE InsertBook;
 
 CREATE OR REPLACE PROCEDURE InsertBook(
     myBookID IN NUMBER,
@@ -47,9 +42,7 @@ CREATE OR REPLACE PROCEDURE InsertBook(
 /
 
 
-EXEC InsertBook(1, '스포츠과학', '마당과학서적', 25000);
 
-SELECT * FROM Book;
 
 **********************************
 동일한 도서가 있는지 점검한 후 
@@ -75,37 +68,30 @@ CREATE OR REPLACE PROCEDURE BookInsertOrUpdate(
  END;
 /
 
-EXEC BookInsertOrUpdate(2, '스포츠 즐거움', '마당과학서적', 25000);
-SELECT * FROM Book; 
-/* 2번 투플 삽입 결과 확인 */
-
-
-EXEC BookInsertOrUpdate(2, '스포츠 즐거움', '마당과학서적', 20000);
-SELECT * FROM Book; 
-/* 2번 투플 가격 변경 확인 */
 
 
 
-##############################
-function
-###############################
-drop function fn_update_sal;
 
-create or replace function fn_update_sal(v_empno in number)
-return number
-is
- v_sal number;
-begin
- update emp  set sal=sal*1.1  where empno=v_empno;
 
- select sal into v_sal from emp where empno=v_empno;
- return v_sal;
-end;
+
+
+##########################################
+FUNCTION
+########################################
+CREATE OR REPLACE FUNCTION fnc_Interest(
+    price NUMBER) RETURN INT
+  IS
+     myInterest NUMBER;
+  BEGIN
+  /* 가격이 30,000원 이상이면 10%, 30,000원 미만이면 5% */
+    IF Price >= 30000 THEN myInterest := Price * 0.1;
+    ELSE myInterest := Price * 0.05;
+   END IF;
+   RETURN myInterest;
+  END;
 /
 
-var salary number;
-execute :salary := fn_update_sal(7839)
-print salary;
+
 
 
 ####################################
@@ -195,9 +181,6 @@ CREATE OR REPLACE TRIGGER AfterInsertBook
 set serveroutput on;
 
 
-INSERT INTO Book VALUES(3, '스포츠 과학 1', '이상미디어', 25000);
-SELECT * FROM Book WHERE bookid='3';
-SELECT * FROM Book_log WHERE bookid_l='3';                /* 결과 확인 */
 
 
          
@@ -229,22 +212,6 @@ CREATE OR REPLACE PROCEDURE Interest
  /
 
 
-##########################################
-FUNCTION
-########################################
-CREATE OR REPLACE FUNCTION fnc_Interest(
-    price NUMBER) RETURN INT
-  IS
-     myInterest NUMBER;
-  BEGIN
-  /* 가격이 30,000원 이상이면 10%, 30,000원 미만이면 5% */
-    IF Price >= 30000 THEN myInterest := Price * 0.1;
-    ELSE myInterest := Price * 0.05;
-   END IF;
-   RETURN myInterest;
-  END;
 
-SELECT custid, orderid, saleprice, fnc_Interest(saleprice) interest
-    FROM Orders;
 
 
