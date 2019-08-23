@@ -1,14 +1,14 @@
 
-¹®Á¦ °³¿ä : show() ¸Þ¼Òµå´Â ¸Å°³º¯¼ö·Î ºÎ¼­¹øÈ£(DEPARTMENT_ID) Á¤º¸¸¦ ÀÔ·Â ¹Þ¾Æ¼­ ÇØ´ç
-ºÎ¼­¿¡ ÇØ´çÇÏ´Â »ç¿øÀÇ Æò±Õ ±Þ¿©Á¤º¸¸¦ Ãâ·ÂÇÏ´Â ¸Þ¼­µåÀÌ´Ù. 
-Æ¯Á¤ ºÎ¼­¿¡ ÇØ´çÇÏ´Â Á÷¿øÁ¤º¸¸¦ Ãâ·ÂÇÏ´Â show () ¸Þ¼Òµå¸¦ ±¸ÇöÇÏ½Ã¿À. 
+ë¬¸ì œ ê°œìš” : show() ë©”ì†Œë“œëŠ” ë§¤ê°œë³€ìˆ˜ë¡œ ë¶€ì„œë²ˆí˜¸(DEPARTMENT_ID) ì •ë³´ë¥¼ ìž…ë ¥ ë°›ì•„ì„œ í•´ë‹¹
+ë¶€ì„œì— í•´ë‹¹í•˜ëŠ” ì‚¬ì›ì˜ í‰ê·  ê¸‰ì—¬ì •ë³´ë¥¼ ì¶œë ¥í•˜ëŠ” ë©”ì„œë“œì´ë‹¤. 
+íŠ¹ì • ë¶€ì„œì— í•´ë‹¹í•˜ëŠ” ì§ì›ì •ë³´ë¥¼ ì¶œë ¥í•˜ëŠ” show () ë©”ì†Œë“œë¥¼ êµ¬í˜„í•˜ì‹œì˜¤. 
 
 public class Prob {
   
 	
         private static void show(int DEPARTMENT_ID) {
    		
-		// ¹®Á¦ Á¶°Ç¿¡ ¸Â°Ô ±¸ÇöÇÏ½Ã¿À.
+		// ë¬¸ì œ ì¡°ê±´ì— ë§žê²Œ êµ¬í˜„í•˜ì‹œì˜¤.
 	}
 	
 	public static void main(String[] args) {
@@ -18,20 +18,6 @@ public class Prob {
 	}	
 }
 
-
-<<ÁÖÀÇ»çÇ×>>
-1. mian() ¸Þ¼­µå´Â ¼öÁ¤ÇÏÁö ¾Ê°í ½ÇÇàÇØ¾ß ÇÏ¸ç,             
-   show() ¸Þ¼ÒµåÀÇ ½Ã±×´ÏÃÄµµ º¯°æÇÒ ¼ö  ¾ø½À´Ï´Ù.
-
-2. PreparedStatement¸¦ »ç¿ëÇØ¾ß ÇÕ´Ï´Ù.
-   PreparedStatement¸¦ »ç¿ëÇÏÁö ¾ÊÀº °æ¿ì´Â ½ÇÇà
-   °á°ú°¡ µ¿ÀÏÇÏ´Ù ÇÏ´õ¶óµµ ºÎºÐÁ¡¼ö·Î Ã³¸®ÇÕ´Ï´Ù.
-
-3. Ãâ·Â °á°ú°¡ <<½ÇÇà°á°ú>>¿Í ´Ù¸¥ °æ¿ì ¿À´äÀ¸·Î
-   Ã³¸®µË´Ï´Ù.
-
-4. ÄÄÆÄÀÏ ¿À·ù³ª Exception ¹ß»ý ½Ã, ¸ðµÎ ¿À´äÀ¸·Î
-   Ã³¸®µË´Ï´Ù.
 
 
 
