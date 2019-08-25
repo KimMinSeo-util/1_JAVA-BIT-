@@ -327,3 +327,14 @@ plot(cars$dist , cars$speed)
 abline((m))
 
 
+#다중 회계 분석 
+data("iris")
+plot(iris[,1:4])
+cor(iris[,1:4])
+
+rs <- lm(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width,data = iris)
+summary(rs)
+
+par(mfrow=c(2,2))
+plot(rs)
+
