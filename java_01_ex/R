@@ -1,0 +1,329 @@
+z<-2020
+z
+
+y<-c('a','b','c')
+y
+z<-1:10
+z
+x <- seq(from=10,to=100,by=10)
+x
+rep(7:10,times=3)
+rep(7:10,each=3)
+x[-2]
+x[-c(2:5)]
+x[x%%50==0]
+z<- letters[1:26]
+z
+names(z) <- 1:26
+z[5]
+mode(x)
+paste("abc",z[5],sep="-")
+paste(z,"~")
+paste(z,1:3)
+
+
+substr("hello",2,4)
+msg <- "hello java" 
+nchar(msg)
+names <- c("kim","hong","ko","lee")
+substr(names,1,1)
+
+z
+m <- matrix(z,5,5)
+matrix(z,5)
+m
+diag(m)
+n <- matrix(1:6,2,3)
+n
+n%*%t(n)
+
+t(n)
+n
+n[1,]
+n[,1]
+
+
+
+e1 <- c('a','b','c')
+e2 <- c(10,20,30)
+e3 <- c(2014,2015,2016)
+e1
+e2
+e3
+list1 <- list(e1,e2,e3)
+list1
+list2 <- list(e1=e1,e2=e2,e3=e3)
+list2
+list2$e1
+
+unlist(list1)
+df1 <- data.frame(e1,e2,e3)
+df1[1,]
+df1[,1]
+df1[,"e1"]
+df1$e1=="a"
+df1
+d1 <- data(airquality)
+d1
+head(d1)
+
+summary(airquality)
+head(airquality)
+tail(airquality)
+
+
+nr <- data.frame(Ozone=40, Solar.R=120, Wind=8, Temp=77, Month=10, Day=1)
+nr
+nr2 <- rbind(airquality,nr)
+nr2
+
+dim(nr2)
+
+nc <- 1:nrow(nr2)
+nc
+nr3 <- cbind(nr2,nc)
+nr3
+
+subset(airquality,select = c(Ozone,Temp,Wind),subset=Temp>90,sort=F)
+s1 <- subset(airquality,select = c(Ozone,Temp,Wind),subset=Temp>90,sort=F)
+s1
+s2 <- subset(airquality,select = c(Ozone,Temp,Wind),subset=Wind>16,sort=F)
+s2
+mm1 <- merge(s1,s2,by=c("Ozone","Temp","Wind"),sort=F)
+mm1
+mm1 <- merge(s1,s2)
+mm1
+s1
+s2
+
+http://jse.amstat.org/datasets/movietotal.dat.txt
+
+r1 <- read.delim("http://jse.amstat.org/datasets/movietotal.dat.txt",sep="\t")
+
+r1
+rc <- as.character(r1$MOVIE)
+rc
+grep("in" , rc , ignore.case = F)
+grep("in" , rc , ignore.case = T)
+
+
+
+
+z <- 0/0
+z
+is.nan(z)
+is.na(z)
+
+z<-c(1,3,5,7,9,11,13)
+z
+z*z
+mean(z)
+cor(z,y)
+sum(z)
+median(z)
+sd(z)
+var(z)
+cor(z,z)
+?cor
+
+
+library(reshape)
+summary(tips)
+head(tips)
+nrow(tips)
+tips$no <- 1:nrow(tips)
+
+melt(tips)
+tips2 <- melt(tips,id=c("no","sex","smoker","day","time"),na.rm=TRUE)
+head(tips2)
+
+table(tips2$variable)
+
+cast(tips2, time ~ variable,mean)
+cast(tips2, time ~ variable,c(mean,length))
+
+cast(tips2,  day ~ variable ~time,c(mean,length))
+
+cast(tips2, day ~ . | variable,mean)
+
+install.packages("sqldf")
+data(french_fries,package = "reshape")
+head(french_fries)
+library(sqldf)
+sqldf("select * from french_fries limit 6")
+?sqldf
+sqldf("select count(*) from french_fries where treatment=1")
+head(french_fries)
+
+names(french_fries)[2] <- "oil.type"
+sqldf("select * from french_fries limit 6")
+
+install.packages("plyr")
+library(plyr)
+data("baseball")
+head(baseball)
+bb1 <- baseball[,c(1,2,5,13)]
+bb1
+head(bb1)
+ddply(bb1[1:10,],~year,nrow)
+ddply(bb1[1:100,],~year,nrow)
+ddply(bb1[1:100,],.(year),nrow)
+ddply(bb1[1:100,],"year",nrow)
+ddply(bb1[1:100,],.(lg),c(nrow,ncol))
+
+install.packages("data.table")
+library(data.table)
+
+names <- c("kim","hong","ko","lee")
+w <- c(55,56,49,70)
+h <- c(155,170,165,180)
+data.table(names,w,h)
+
+data(wine,package="HDclassif")
+
+data(tips,package="reshape")
+
+library(reshape)
+summary(tips)
+head(tips)
+
+install.packages("tabplot")
+library(tabplot)
+tableplot(tips)
+
+x <- c(2,4,8,9,NA)
+mean(x)
+mean(x,na.rm=T)
+
+y <- c("2","4",8,9,NA)
+mean(as.numeric(y),na.rm=T)
+
+x
+xx <- na.omit(x)
+xx
+class(xx)
+
+sample(1:100,5)
+sample(1:100,5,replace = T)
+
+data("iris")
+head(iris)
+
+rnorm(5,mean = 10,sd=25)
+rnorm(5,mean = 10,sd=1)
+
+pnorm(0,mean = 0,sd=1)
+
+
+
+r <- rnorm(1000)
+t.test(r)
+
+r <- rnorm(1000,mean=0)
+t.test(r)
+
+#모평균 귀무가설 : 모평균은 0이다
+
+data(sleep)
+head(sleep)
+t.test(extra~group,data=sleep)
+t.test(extra~group,data=sleep,paired=F,var.equal=T)
+t.test(extra~group,data=sleep,paired=T,var.equal=T)
+
+t.test(extra~group,data=sleep)
+var.test(extra~group,data=sleep)
+
+data(iris)
+var.test(iris$Sepal.Width,iris$Sepal.Length)
+
+prop.test(42,100)
+prop.test(12,100)
+binom.test(42,100)
+binom.test(12,100)
+
+prop.test(c(44,55),c(100,90))
+
+cor.test(c(1,2,3,4,5),c(1,0,3,4,5),method = "pearson")
+
+rnorm(100)
+runif(100)
+ks.test(rnorm(100),runif(100))   #pvalue < .05 이므로 귀무가설기각 다른집단 
+ks.test(rnorm(100),rnorm(100))   #pvalue > .05 이므로 귀무가설채택 같은집단 
+ks.test(runif(100),runif(100))   #pvalue > .05 이므로 귀무가설채택 같은집단 
+
+#질적 자료 요약 기법
+
+library(MASS)
+table(survey$Smoke)
+table(survey$Sex,survey$Smoke)
+
+smoke <- table(survey$Smoke)
+pie(smoke)
+barplot(smoke)
+
+#양적  자료 요약 기법
+data("mtcars")
+hist(mtcars$mpg)
+stem(mtcars$hp)
+
+library(ggplot2)
+ggplot(BOD,aes(x=BOD$Time,y=BOD$demand))+geom_line()
+ggplot(BOD,aes(x=BOD$Time,y=BOD$demand))+geom_point()
+
+ggplot(mtcars,aes(x=mtcars$hp,y=mtcars$wt))+geom_point()
+
+data("iris")       
+head(iris)
+summary(iris)
+mean(iris$Sepal.Length)
+median(iris$Sepal.Length)
+sd(iris$Sepal.Length) #표준편차
+var(iris$Sepal.Length)
+quantile(iris$Sepal.Length)
+quantile(iris$Sepal.Length,0/4)
+quantile(iris$Sepal.Length,1/4)
+max(iris$Sepal.Length)
+min(iris$Sepal.Length)
+
+
+#상관 분석 : 데이터내에서 두변수간의 관계  (범주형은 불가능 )
+# 두 변수의 상관성에 대한 예측이므로 가설과 검증을 통해 통계적 유의성 판단.
+# 결정계수는 회귀 분석의 설명력을 의미
+
+library(Hmisc)
+library(ggplot2)
+data("airquality")
+airquality
+a1 <- na.omit(airquality)  #NA 제거  
+a1
+head(a1)
+g <- ggplot(a1,aes(a1$Ozone,a1$Temp))
+g + geom_point() + geom_smooth(method = "lm")
+
+cor(a1$Ozone,a1$Temp)
+cor(a1[,c(1:4)])
+cov(a1[,c(1:4)])    #공분산  
+
+#단순 회귀 분석
+data("cars")
+cars
+plot(cars$speed,cars$dist)
+
+cor.test(cars$speed,cars$dist)
+
+#회귀 분석 
+lm(cars$dist ~ cars$speed )
+m <- lm(dist ~ speed ,data = cars)
+summary(m)
+
+head(cars)
+
+
+par(mfrow = c(2,2))
+plot(m)
+
+par(mfrow = c(1,1))
+plot(cars$dist , cars$speed)
+abline((m))
+
+
