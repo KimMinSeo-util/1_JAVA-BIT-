@@ -126,15 +126,14 @@ select * from dept;
 create table emp2 as select * from emp;
 create table dept2 as select * from dept;
 
-insert into dept values(50,'EDU','SEOUL');
+insert into dept(deptno,dname,loc) values(50,'EDU','SEOUL');
 insert into dept2 values(50,'EDU','SEOUL');
 commit;
 
 insert into dept values(10,'EDU','SEOUL');
 insert into dept2 values(10,'EDU','SEOUL');
 
-insert into emp (empno,ename,hiredate,sal,deptno) 
-             values(9999,'홍길동',sysdate,0,40);
+insert into emp (empno,ename,hiredate,sal,deptno) values(9999,'홍길동',sysdate,0,40);
 
 insert into emp2 (empno,ename,hiredate,sal,deptno) 
              values(9999,'홍길동',sysdate,0,90);

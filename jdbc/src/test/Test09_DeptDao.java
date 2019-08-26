@@ -7,6 +7,7 @@ public class Test09_DeptDao {
 		DeptDao dao = new DeptDao();
 		
 		dao.getAllDeptRec().forEach(i->System.out.println(i));
-
+        System.out.println("---------------------");
+        dao.getAllDeptRec(2, 4).forEach(i->System.out.println(i));
 	}
 }

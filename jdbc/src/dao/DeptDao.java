@@ -44,6 +44,46 @@ public class DeptDao {
 		return list;
 	}
 	
+	public List<Dept> getAllDeptRec(int page , int n) {
+		String sql = 
+		"select * from ( "+
+			     "select rownum row# , deptno,dname,loc "+ 
+			     "from (select * from dept order by deptno) "+
+			") where row# between ? and ? "; 
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs =null;
+		
+		List<Dept> list = new ArrayList<Dept>();
+		try {
+			System.out.println(" ***** con 할당 ****** ");
+			con = JDBCUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			// ? 세팅
+			int start = n*(page-1)+1;
+			int end = start+n-1;
+			ps.setInt(1,start );
+			ps.setInt(2, end);
+			
+			//실행 및 결과값 핸들링
+            rs = ps.executeQuery();
+            while (rs.next()) {
+			   list.add(new Dept(rs.getInt("deptno"), 
+			   			         rs.getString("dname"), 
+			   			         rs.getString("loc")));
+			   	
+			}
+            
+		}catch (Exception e) {
+           e.printStackTrace();
+		}finally {
+			JDBCUtil.close(con, ps, rs);
+			System.out.println(" ***** con 반납 ****** ");
+		}
+		
+		return list;
+	}
 	
 	
 	public int insertDept(Dept dept) {

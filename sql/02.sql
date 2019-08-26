@@ -136,6 +136,10 @@ where ename like '%S%';
 
 select *
 from emp
+where lower(ename) like lower('%S%');
+
+select *
+from emp
 where ename like '%M_T%';
 
 ## 81년도에 입사한 사원 목록 추출

@@ -365,8 +365,10 @@ where row# between 11 and 15;
 3page  11~15    5*2+1       +4
 
 
-
-
+select * from (
+     select rownum row# , deptno,dname,loc 
+     from (select * from dept order by deptno)
+) where row# between 3 and 5; 
 
 
 
