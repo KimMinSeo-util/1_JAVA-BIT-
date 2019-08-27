@@ -12,7 +12,7 @@ import vo.Dept;
 public class DeptDao {
 
 	//Dept 테이블의 모든 레코드 정보 
-	public List<Dept> getAllDeptRec() {
+	public List<Dept> getDeptRec() {
 		String sql = "select * from dept order by deptno";
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -40,16 +40,18 @@ public class DeptDao {
 			JDBCUtil.close(con, ps, rs);
 			System.out.println(" ***** con 반납 ****** ");
 		}
-		
 		return list;
 	}
 	
-	public List<Dept> getAllDeptRec(int page , int n) {
-		String sql = 
-		"select * from ( "+
-			     "select rownum row# , deptno,dname,loc "+ 
-			     "from (select * from dept order by deptno) "+
-			") where row# between ? and ? "; 
+	public List<Dept> getDeptRec(int page,int n) {
+		
+		String sql = "select * from ( "+
+				   "select rownum row#,deptno,dname,loc "+
+				   "from (select * from dept order by deptno) "+
+				") where row# between ? and ? ";
+		
+		int start = n*(page-1)+1;
+		int end=  start+(n-1);
 		
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -57,13 +59,11 @@ public class DeptDao {
 		
 		List<Dept> list = new ArrayList<Dept>();
 		try {
-			System.out.println(" ***** con 할당 ****** ");
+			//System.out.println(" ***** con 할당 ****** ");
 			con = JDBCUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			// ? 세팅
-			int start = n*(page-1)+1;
-			int end = start+n-1;
-			ps.setInt(1,start );
+			ps.setInt(1, start);
 			ps.setInt(2, end);
 			
 			//실행 및 결과값 핸들링
@@ -79,12 +79,10 @@ public class DeptDao {
            e.printStackTrace();
 		}finally {
 			JDBCUtil.close(con, ps, rs);
-			System.out.println(" ***** con 반납 ****** ");
+			//System.out.println(" ***** con 반납 ****** ");
 		}
-		
 		return list;
 	}
-	
 	
 	public int insertDept(Dept dept) {
 		String sql = "insert into dept(deptno,dname,loc) values(?,?,?)";
