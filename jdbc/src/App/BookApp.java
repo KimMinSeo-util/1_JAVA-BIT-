@@ -1,15 +1,103 @@
 package App;
 
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Panel;
+import java.awt.TextArea;
+import java.awt.TextField;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+import dao.BookDAO;
+import dao.BookDAO_MySQL;
+import dao.BookDAO_Oracle;
 import service.BookService;
+import service.BookServiceImpl;
+import vo.BookVO;
 
 public class BookApp {
 	public static void main(String[] args) {
-
-		 BookService service = null;
-		 
-		// service.addBook(vo)
-		
-		 service.bookList().forEach(i->System.out.println(i));
-		
+		 	new Gui();
 	}
+}
+
+class Gui extends JFrame{
+    JButton add,list,delete,search,exit;
+    TextField title,price,isbn,publisher;
+    TextArea output;
+	
+    BookDAO dao = new BookDAO_Oracle();
+    BookService service = new BookServiceImpl(dao);
+    
+    Gui(){
+    	
+    	Panel p1 = new Panel();
+    	p1.add(add = new JButton("ADD"));
+    	p1.add(list = new JButton("List"));
+    	p1.add(delete = new JButton("삭제"));
+    	p1.add(search = new JButton("검색"));
+    	p1.add(exit = new JButton("종료"));
+    	add(p1,BorderLayout.SOUTH);
+    	
+    	Panel p2 = new Panel();
+    	p2.setLayout(new GridLayout(4,2));
+    	p2.add(new JLabel("   ISBN   "));
+    	p2.add(isbn = new TextField(20));
+    	p2.add(new JLabel("  제      목   "));
+    	p2.add(title = new TextField(20));
+    	p2.add(new JLabel("  가      격  "));
+    	p2.add(price = new TextField(20));
+    	p2.add(new JLabel("  출 판 사  "));
+    	p2.add(publisher = new TextField(20));
+    	
+    	
+    	add(p2,BorderLayout.NORTH);
+    	
+    	add(output= new TextArea(15, 40));
+    	output.setFont(new Font(null,1,20));
+    	
+    	pack();
+    	setVisible(true);
+    	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	
+    	add.addActionListener(e -> {
+    		BookVO vo = new BookVO();
+    		vo.setBookid(Integer.parseInt(isbn.getText()));
+    		vo.setBookname(title.getText());
+    		vo.setPrice(Integer.parseInt(price.getText()));
+    		vo.setPublisher(publisher.getText());
+    		
+    	    service.addBook(vo);
+    	    
+    	    title.setText("");
+    	    isbn.setText("");
+    	    price.setText("");
+    	    publisher.setText("");
+    	});
+    	
+    	exit.addActionListener(e-> {
+    	    //mgr.save();
+    		System.exit(0);
+    	});
+    	
+    	list.addActionListener(e -> {
+    		output.setText(" BookList  \n");
+    		//mgr.getBookList().forEach(i -> {
+    		//	output.append(i+"\n"); 
+    		//} );
+    		
+    		service.bookList().forEach(i->output.append(i+"\n"));
+    	});
+    	
+    	delete.addActionListener(e -> {
+    		int i = service.deleteBook(Integer.parseInt(isbn.getText()));
+    		output.setText(i+ "개의  도서 삭제   \n");
+    	});
+    	
+    	
+    }
+	
 }
