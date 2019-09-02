@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Insert title here</title>
+<script type="text/javascript">
+var f4 = function a1(){
+    var data=0;
+    function i1(){
+    alert('data ='+data);
+   	 return ++data;
+    }
+    return i1;
+};
+let f = function () {
+	let scope = 1;
+	
+	return function () {
+		scope++;
+		console.log('${scope}');
+	}
+};
+
+var f6 = function a1(){
+    var data=0;
+    function i1(){
+     alert('data ='+data);
+   	 return ++data;
+    }
+    return i1;
+}();
+</script>
+</head>
+<body>
+<h3> fn.js 파일 테스트중입니다.</h3>
+<button onclick="f4();">f4()</button>
+
+<button onclick="f6();">f6()</button>
+</body>
+</html>
