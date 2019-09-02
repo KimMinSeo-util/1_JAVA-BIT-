@@ -1,0 +1,10 @@
+
+eclipse javascript plugin
+https://handcoding.tistory.com/8
+
+http://oss.opensagres.fr/tern.repository/1.2.0/ 
+
+
+Âü°í 
+https://github.com/angelozerr/tern.java/wiki
+
