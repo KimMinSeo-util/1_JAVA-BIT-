@@ -76,16 +76,57 @@ function callTenTimes(fn){
 
 //let intervalId  = setInterval(callback,3000);
 //clearInterval(intervalId)
-
+/*
 let id2 = setInterval(function() {
 	log(new Date());
 }, 1000)
 
-clearInterval(id2)
+
+setTimeout(function() {
+	clearInterval(id2);
+	//location.href="http://www.naver.com";
+	//location.href="http://localhost:8000/2_css/submenu/index.html";
+}, 5000);
+*/
+
+function fa(){
+	let data = 0;
+	function inner(){
+		return ++data;
+	}
+	return inner;
+} 
+
+let ff1 = fa;
+let ff2 = fa();
+
+ff1()()
+ff1()()
+ff1()()
+ff1()()
+
+ff2()
+ff2()
+ff2()
+ff2()
 
 
+let fb1 =function fb(){
+			let data = 0;
+			function inner(){
+				return ++data;
+			}
+			return inner;
+		 } ;
 
 
+ let fb2 =function fb(){
+		let data = 0;
+		function inner(){
+			return ++data;
+		}
+		return inner;
+	 }() ;
 
 
 
