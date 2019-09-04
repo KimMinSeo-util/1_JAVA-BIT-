@@ -36,15 +36,7 @@
    }
 </style>
 
-<script>
-const log = console.log;
 
-function add(data) {
-	//alert(data);
-	log(data);
-}
-
-</script>
 
 
 
@@ -63,8 +55,9 @@ function add(data) {
    <tr>
       <td><input type="button" value="7" class="btn"></td>
       <td><input type="button" value="8" class="btn"></td>
-      <td><input type="button" value="9" class="btn" onclick="add(9)"></td>
-      <td colspan="2"><input type="button" value="C" class="clr"></td>
+      <!-- <td><input type="button" value="9" class="btn" onclick="add(9)"></td> -->
+      <td><input type="button" value="9" class="btn" ></td>
+      <td colspan="2"><input type="button" value="C" class="clr" onclick="c()"></td>
    </tr>
    <tr>
       <td><input type="button" value="4" class="btn"></td>
@@ -83,7 +76,7 @@ function add(data) {
     <tr>
       <td><input type="button" value="0" class="btn"></td>
       <td><input type="button" value="." class="btn"></td>
-      <td colspan="2"><input type="button" value="=" class="equal"></td>
+      <td colspan="2"><input type="button" value="=" class="equal" onclick="e()"></td>
       <td><input type="button" value="-" class="btn"></td>
    </tr>
 
@@ -91,5 +84,45 @@ function add(data) {
 </tbody>
 </table>
 
+
+<script>
+const log = console.log;
+
+let disp = document.getElementById('display');
+let expression ="";
+
+let btn = document.getElementsByClassName('btn');
+for(let i=0; i<btn.length;i++){
+	btn[i].setAttribute('onclick', "add('"+btn[i].value +"')");	
+}
+
+
+function add(data) {
+	//alert(data);
+	expression += data;
+	disp.value = expression;
+	//log(data);
+	
+}
+function c() {
+	expression ="";
+	disp.value = 0;
+}
+
+function e() {
+	disp.value = eval(expression);
+	expression = "";
+}
+</script>
+
+
 </body>
 </html>
+
+
+
+
+
+
+
+
