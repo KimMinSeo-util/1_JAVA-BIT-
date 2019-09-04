@@ -100,13 +100,11 @@ function fa(){
 let ff1 = fa;
 let ff2 = fa();
 
-// outer함수가 매번 새롭게 호출되므로 
 ff1()()
 ff1()()
 ff1()()
 ff1()()
 
-//수행중인 outer 함수를 모두 공유
 ff2()
 ff2()
 ff2()
