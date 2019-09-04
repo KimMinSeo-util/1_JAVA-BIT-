@@ -186,6 +186,8 @@ for(let data  of students){
 
 
 
+students.forEach(i=>log(i.toString()));
+students.forEach(i=>log("foreach : "+i.name+":"+i.avg()));
 
 
 
