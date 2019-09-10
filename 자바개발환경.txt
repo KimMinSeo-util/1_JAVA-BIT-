@@ -1,0 +1,48 @@
+
+1. jdk 8.0  install
+2.  JAVA_HOME 설정  : C:\Program Files\Java\jdk1.8.0_211
+    path 설정 : C:\Program Files\Java\jdk1.8.0_211\bin
+    class path : .;~~~.jar
+
+3. eclipse 설치  2019/03 :https://www.eclipse.org/downloads
+
+4. tomcatserver 9.0 : https://tomcat.apache.org/
+   CATALINA_HOME 설정 : C:\bit_java\apache-tomcat-9.0.24  => 필요하면 설정
+    
+   tomcatserver/conf/server.xml 수정 => 69번 라인 8080 => 9000 서비스 port 변경 
+
+5. 워크스페이스 폴더 결정
+
+6. 기존에 tomcat 서버 종료한다. (stop)
+
+7. eclipse 구동후 개발 환경 설정 
+   
+   a.servers탭에서 톰겟환경 설정
+   b.tern plug in 설치  : http://oss.opensagres.fr/tern.repository/1.2.0/ 
+
+      웹프로젝트 생성후 / 우측키 => config => convert tern prj =>  brower , ckeditor , jquery 체크
+
+      
+   c: git 퍼스펙티브에서 git 주소 clone해서 사용 가능  : local 디렉토리와 동기화 해서 사용 한다.
+
+   
+   d: 인코딩설정  : UTF-8
+      general / workspace => 인코딩  UTF-8
+      web     / html   => 인코딩  UTF-8
+                css    => 인코딩  UTF-8
+	        jsp    => 인코딩  UTF-8
+
+      javascript / editor / content assist / enable auto activation 체크 
+   
+      general/ webbrowser = > chrom 설정
+
+   E: window 메뉴 / webbrowser
+
+   F: lib 설정 => .jar
+      WEB-INF/lib  위치에 넣으면 인식한다.
+
+
+
+
+
+
